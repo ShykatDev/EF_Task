@@ -1,0 +1,459 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;700&display=swap");
+
+$dark: #242424;
+$user: #157aff;
+$darkOrange: #fe471b;
+$lightOrange: #fe7704;
+$light: rgb(154, 154, 154);
+
+@mixin basicStyle($height, $yPadding, $xPadding) {
+  width: 100%;
+  height: $height;
+  padding: $yPadding $xPadding;
+}
+
+@mixin flexStyles($justifyContent, $alignItems) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: $dark;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+
+.overLay {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #0000007b;
+  z-index: 10;
+  display: none;
+}
+
+.overLay.activeOverlay {
+  display: block;
+}
+
+nav {
+  width: 100%;
+  height: auto;
+  @include flexStyles(space-between, start);
+  padding: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+
+  .logo {
+    width: 5%;
+  }
+
+  .middle {
+    width: 43rem;
+    .top {
+      margin-bottom: 1rem;
+      color: $light;
+      .topMenu {
+        @include flexStyles(center, start);
+        li {
+          list-style: none;
+          padding-right: 2rem;
+        }
+      }
+    }
+
+    .bottom {
+      position: relative;
+      .ui {
+        @include flexStyles(center, center);
+        background: rgba(61, 61, 61, 0.292);
+        backdrop-filter: blur(20px);
+        border-radius: 2rem;
+        padding-left: 2rem;
+        position: relative;
+
+        .bottomMenu {
+          @include flexStyles(space-between, start);
+          li {
+            list-style: none;
+            padding-right: 2rem;
+            @include flexStyles(space-evenly, center);
+            gap: 0.7rem;
+            cursor: pointer;
+
+            span {
+              color: white;
+            }
+
+            i {
+              font-size: 1.4rem;
+              color: white;
+            }
+
+            .downArrow {
+              color: $light;
+              font-size: 1rem;
+            }
+          }
+
+          li.colorLink {
+            span {
+              color: rgb(144, 144, 144) !important;
+            }
+          }
+        }
+
+        .search {
+          background: linear-gradient(-120deg, $darkOrange, $lightOrange);
+          @include flexStyles(center, center);
+          width: 4rem;
+          height: 4rem;
+          border-radius: 50%;
+          cursor: pointer;
+          i {
+            color: white;
+          }
+        }
+
+        .searchBar {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 2rem;
+          top: 0;
+          left: 0;
+          background: linear-gradient(-120deg, $darkOrange, $lightOrange);
+          @include flexStyles(space-between, center);
+          transition: 0.3s;
+          display: none;
+
+          i {
+            position: absolute;
+            right: -5%;
+            color: white;
+            top: 50%;
+            transform: translate(5%, -50%);
+            cursor: pointer;
+          }
+
+          input {
+            width: 70%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background: none;
+            color: rgb(237, 237, 237);
+            padding-left: 2rem;
+
+            &::placeholder {
+              color: rgba(255, 255, 255, 0.484);
+            }
+          }
+
+          button {
+            width: auto;
+            height: 50%;
+            outline: none;
+            border: none;
+            background: none;
+            color: white;
+            margin-left: 4rem;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .dropDown {
+      width: 100%;
+      height: auto;
+      padding-top: 2rem;
+      display: none;
+      opacity: 0;
+      position: absolute;
+      transition: 3s;
+      z-index: -1;
+
+      .content {
+        width: 100%;
+        height: 100%;
+        background: rgba(61, 61, 61, 0.292);
+        backdrop-filter: blur(20px);
+        border-radius: 0.5rem;
+        padding: 2rem;
+
+        .platformRow {
+          .bar {
+            @include flexStyles(space-between, center);
+            background: rgba(0, 0, 0, 0.447);
+            padding: 0.5rem 1rem;
+            border-radius: 0.4rem;
+            color: white;
+            span {
+              font-size: 0.8rem;
+            }
+          }
+
+          .items {
+            @include flexStyles(start, start);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            margin-top: 1.5rem;
+
+            .item {
+              @include flexStyles(start, center);
+              width: 29%;
+              height: 3.5rem;
+              gap: 1rem;
+              padding: 0.5rem;
+              border-radius: 2rem;
+              cursor: pointer;
+              transition: 0.3s;
+
+              img {
+                width: 24%;
+                border-radius: 50%;
+              }
+              p {
+                color: white;
+                font-size: 0.9rem;
+              }
+
+              &:hover {
+                background: rgba(255, 255, 255, 0.237);
+              }
+            }
+          }
+        }
+
+        .prepaidRow {
+          margin-top: 2rem;
+          .bar {
+            @include flexStyles(space-between, center);
+            background: rgba(0, 0, 0, 0.447);
+            padding: 0.5rem 1rem;
+            border-radius: 0.4rem;
+            color: white;
+
+            span {
+              font-size: 0.8rem;
+            }
+          }
+
+          .items {
+            width: 100%;
+            @include flexStyles(space-between, center);
+            margin-top: 1.5rem;
+
+            .item {
+              width: 30%;
+              height: 5rem;
+              @include flexStyles(space-between, center);
+              flex-direction: column;
+
+              img {
+                width: 80%;
+              }
+              p {
+                color: rgb(235, 235, 235);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .dropDown.activeDropdown {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  .right {
+    @include flexStyles(space-between, center);
+    gap: 2rem;
+    .cart {
+      font-size: 1.6rem;
+      color: white;
+    }
+
+    .user {
+      color: $user;
+      font-size: 1.4rem;
+      background: #353535;
+      padding: 0.7rem;
+      border-radius: 0.3rem;
+    }
+  }
+}
+
+header {
+  width: 100%;
+  height: 75vh;
+  background: url("./assets/banner.jpg");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  @include flexStyles(center, start);
+  flex-direction: column;
+  padding: 0 15rem;
+
+  small {
+    color: white;
+    padding: 0.3rem 0.5rem;
+    background: rgba(170, 170, 170, 0.534);
+    border-radius: 0.3rem;
+    margin-top: 3rem;
+  }
+
+  h1 {
+    width: 30%;
+    font-size: 2rem;
+    color: white;
+    font-weight: 500;
+    line-height: 2.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .price {
+    @include flexStyles(start, center);
+    gap: 2rem;
+
+    h2 {
+      color: white;
+      font-size: 3rem;
+      font-weight: 400;
+    }
+
+    small {
+      margin-top: 0;
+      background: $darkOrange;
+      padding: 0.3rem 0;
+      padding-left: 0.5rem;
+      padding-right: 1rem;
+      font-size: 1rem;
+      clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+      border-top-right-radius: 1rem;
+    }
+  }
+
+  .skewSec {
+    position: absolute;
+    width: 100%;
+    height: 10vh;
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+    background-color: $dark;
+    bottom: -1px;
+    left: 0;
+    transform: translate(-0%, -0%);
+  }
+}
+
+section.trending {
+  width: 100%;
+  height: 50vh;
+  margin-top: 3rem;
+  padding: 0rem 15rem;
+
+  .bar {
+    @include flexStyles(space-between, center);
+
+    h2 {
+      color: white;
+      font-weight: 500;
+    }
+    button {
+      padding: 0.7rem 1rem;
+      background: #cccccc21;
+      outline: none;
+      border: 1px solid #ccc;
+      border-radius: 0.3rem;
+      color: #ccc;
+    }
+  }
+
+  .cards {
+    margin-top: 2rem;
+    width: 100%;
+    height: auto;
+    @include flexStyles(space-between, start);
+
+    .card {
+      width: 30%;
+      height: auto;
+      overflow: hidden;
+
+      .cardImg {
+        width: 100%;
+        height: 25vh;
+        position: relative;
+        @include flexStyles(center, center);
+
+        img {
+          width: 98%;
+          height: 100%;
+          border-radius: 0.5rem;
+          object-fit: cover;
+        }
+
+        small {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin-top: 0;
+          background: $darkOrange;
+          padding: 0.3rem 0;
+          padding-left: 0.5rem;
+          padding-right: 1rem;
+          font-size: 1rem;
+          clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+          border-radius: 0.3rem;
+          border-top-right-radius: 1rem;
+        }
+      }
+      .details {
+        @include flexStyles(space-between, center);
+        padding: 0.3rem 0;
+
+        p {
+          color: white;
+        }
+
+        .cardPrice {
+          font-size: 1.3rem;
+        }
+      }
+    }
+
+    .card:nth-child(2) {
+      .details {
+        div {
+          @include flexStyles(start, center);
+          gap: 1rem;
+
+          span {
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border: 1px solid #757575;
+            color: #757575;
+            font-weight: 500;
+            border-radius: 0.2rem;
+          }
+        }
+      }
+    }
+  }
+}
